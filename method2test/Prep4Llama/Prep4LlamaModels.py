@@ -12,8 +12,10 @@ def write_to_csv(output_csv_file, formatted_data, is_first_row=False):
         csv_writer.writerow([formatted_data])
 
 def main():
-    train_folder = r'D:\Research Papers\methods2test\methods2test\corpus\json\test\test'
-    output_folder = r'D:\Fyp data\TestData'
+    folder = ['train','test','eval']
+
+    train_folder = f'D:\Research Papers\methods2test\methods2test\corpus\json\test\{folder[3]}'
+    output_folder = f'D:\FYPDataset\{folder[3]}'
 
     # Iterate through all folders in the train_folder directory
     for foldername in os.listdir(train_folder):
@@ -21,10 +23,8 @@ def main():
         if os.path.isdir(folder_path):
             # Define the output CSV file path for the current folder
             output_csv_file = os.path.join(output_folder, f'{foldername}.csv')
-
-            # Reset the rows_written counter for each folder
-            rows_written = 0
-
+            rows_written = 0    # Reset the rows_written counter for each folder
+            
             # Iterate through all files in the current folder
             for filename in os.listdir(folder_path):
                 if filename.endswith('_corpus.json'):
