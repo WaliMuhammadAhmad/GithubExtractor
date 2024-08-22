@@ -5,6 +5,7 @@ import subprocess
 import shutil
 import copy
 from TestParser import TestParser
+from loggings import loggers
 
 def analyze_project(repo_git, repo_id, grammar_file, tmp, output):
 	"""
@@ -13,6 +14,7 @@ def analyze_project(repo_git, repo_id, grammar_file, tmp, output):
 	repo = {}
 	repo["url"] = repo_git
 	repo["repo_id"] = repo_id
+	log = loggers(f'logs/log/{repo_id}.log')
 
 	#Create folders
 	os.makedirs(tmp, exist_ok=True)
@@ -20,27 +22,32 @@ def analyze_project(repo_git, repo_id, grammar_file, tmp, output):
 	repo_out = os.path.join(output, str(repo_id))
 	os.makedirs(repo_out, exist_ok=True)
 
-	#Clone repo
+	log.info(f"Processing repository : {repo_id}")
+
+	#Clone repository
 	print("Cloning repository...")
 	subprocess.call(['git', 'clone', repo_git, repo_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+	log.info(f"Cloned repository at : {repo_path}")
 
 	#Run analysis
 	language = 'java'
 	print("Extracting and mapping tests...")
 	tot_mtc = find_map_test_cases(repo_path, grammar_file, language, repo_out, repo)
 	(tot_tclass, tot_tc, tot_tclass_fclass, tot_mtc) = tot_mtc
+	log.info(f"Data Extracted from repository : {repo_id}")
 	
 	#Delete repo dir
 	shutil.rmtree(repo_path, ignore_errors=True)
 	if os.path.exists(repo_path):
-		print(f'Failed to delete {repo_path}')
+		log.error(f'Failed to delete {repo_path}')
 
-	#Print Stats
 	print("---- Results ----")
 	print("Test Classes: " + str(tot_tclass))
 	print("Mapped Test Classes: " + str(tot_tclass_fclass))
 	print("Test Cases: " + str(tot_tc))
 	print("Mapped Test Cases: " + str(tot_mtc))
+
+	log.info(f"Repository Processed. Output : {repo_out}")
 
 
 def find_map_test_cases(root, grammar_file, language, output, repo):
@@ -268,8 +275,8 @@ def export_mtc(repo, mtc_list, output):
 	script_file_path = os.path.dirname(os.path.abspath(__file__))
 	output_dir = os.path.join(script_file_path, output)
 
-
-	mtc_id = 0	# idk, starting id for json
+	repo_id = repo['repo_id']
+	mtc_id = 1
 	for mtc_file in mtc_list:
 		for mtc_p in mtc_file:
 			mtc = copy.deepcopy(mtc_p)
@@ -283,7 +290,7 @@ def export_mtc(repo, mtc_list, output):
 				fmethod.pop('class')
 				fmethod.pop('invocations')
 
-			mtc_file = str(mtc_id) + ".json"
+			mtc_file = str(repo_id) +"_"+ str(mtc_id) + ".json"
 			json_path = os.path.join(output_dir, mtc_file)
 			
 			export(mtc, json_path)
@@ -294,21 +301,12 @@ def export(data, out):
     """
     Exports data as json file
     """
-    try:
-        # Print the output path
-        # print(f"Output path: {out}")
-        
+    try:        
         # Ensure the directory exists
         directory = os.path.dirname(out)
-        # print(f"Directory to be created: {directory.ab}")
-        
         if not os.path.exists(directory):
-            # print(f"Directory does not exist. Creating directory: {directory}")
             os.makedirs(directory)
-        # else:
-        #     print(f"Directory already exists: {directory}")
-        
-        # Write the data to the file
+
         # print("Writing data to the file...")
         with open(out, "w") as text_file:
             json.dump(data, text_file, indent=4)  # Write JSON data to the file

@@ -1,5 +1,5 @@
-.vscode/
 __pycache__/
+.vscode/
 
 # virtual environment
 env/
@@ -7,3 +7,5 @@ env/
 # large dir's
 output/
 tmp/
+logs/
+logs/log/

@@ -2,7 +2,7 @@ import subprocess
 import argparse
 import pandas as pd
 from check import check_so_file
-from loggings import loggers # type: ignore
+from loggings import loggers
 
 def automate_find_map_test_cases(csv_file, start, end, tmp, output):
     '''
@@ -53,20 +53,20 @@ def parse_args():
 	parser.add_argument(
 		"--csv_path", 
 		type=str, 
-		default="./data/TopRepoData.csv",
+		default="./data/RepoData.csv",
 		help="Path of the csv file which has the Github Repo's Info",
 	)
 	parser.add_argument(
 		"--start",
 		type=int,
 		default=99,
-		help="Start range for the method and test extraction of Repos from CSV file",
+		help="Start range for the method and test extraction of Repos",
 	)
 	parser.add_argument(
 		"--end",
 		type=int,
 		default=100,
-		help="End range for the method and test extraction of Repos from CSV file",
+		help="End range for the method and test extraction of Repos",
 	)
 	parser.add_argument(
 		"--tmp",
