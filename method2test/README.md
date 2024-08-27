@@ -72,7 +72,7 @@ Deepseek models takes input in a specific format before tokenization. A snap sho
    - Export the JSON files.
    - Logs processes and handles errors.
    - Counts files to ensure data consistency.
-   - Pushes processed data to a Hugging Face repository.
+   - Pushes processed data to a huggingface repository.
 
 ### Prep4Llama
 This is a sub-dir which contains notebook for preparing the dataset acording to Llama models input format. The original dataset are courps in this format: 
@@ -99,4 +99,4 @@ Llama models takes input in a specific format before tokenization. A snap short 
    - Export the CSV files.
    - Logs processes and handles errors.
    - Counts files to ensure data consistency.
-   - Pushes processed data to a Hugging Face repository.
+   - Pushes processed data to a huggingface repository.
