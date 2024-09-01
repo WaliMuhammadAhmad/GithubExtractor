@@ -1,4 +1,7 @@
-dataset_raw/
+__pycache__
+.vscode
+
+dataset/
 output/
 data/
 env/

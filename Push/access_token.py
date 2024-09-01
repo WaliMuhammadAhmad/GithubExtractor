@@ -7,10 +7,14 @@ def auth():
     """
     This function authenticates the user with huggingface using a token stored in the (.env)
 
+    Args:
+        None
+
     Returns:
         hf_token (str): The huggingface token if authentication is successful.
         None: If authentication fails.
     """
+    
     try:
         load_dotenv()  # Load environment variables from .env file
         hf_token = os.getenv("HF_TOKEN")
