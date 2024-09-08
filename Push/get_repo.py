@@ -1,7 +1,6 @@
 from huggingface_hub import login
 from huggingface_hub import Repository
 from huggingface_hub import create_repo
-# from huggingface_hub import HfApi
 from access_token import auth
 import os
 
@@ -31,18 +30,6 @@ def get_repo(clone_path,repo_id):
             repo.git_pull()
             print("Clone finished!")
             return repo
-        
-            # Alternative approach using HfApi:
-            # Uncomment the following lines and comment out the git lines above to use HfApi for uploading.
-            
-            # api = HfApi()
-            # os.chdir(path)
-
-            # api.upload_folder(
-            #   folder_path=path,
-            #   repo_id=repo_id,
-            #   repo_type="dataset",
-            # )
 
         except:
             print(f"fetch repo failed from : {repo_url}")
