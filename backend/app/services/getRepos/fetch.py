@@ -59,7 +59,7 @@ def extract(repos):
             'Ower': repo.owner.login,
             'FullName': repo.full_name,
             'Visibility': repo.visibility,
-            'HTMLURL': repo.html_url,
+            'URL': repo.html_url,
             'GitURL': repo.git_url,
             'SSHURL': repo.ssh_url,
             'CloneURL': repo.clone_url,

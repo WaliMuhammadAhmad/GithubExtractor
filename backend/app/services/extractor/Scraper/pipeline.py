@@ -44,7 +44,6 @@ def automate_find_map_test_cases(csv_file, start, end, tmp, output):
             print(f"Error running command for repo_id {repo_id}: {e}")
             log.error(f"Error running command for : [{repo_name}]: {e}")
 
-
 def parse_args():
 	"""
 	Parse the args passed from the command line
@@ -59,13 +58,13 @@ def parse_args():
 	parser.add_argument(
 		"--start",
 		type=int,
-		default=99,
+		default=0,
 		help="Start range for the method and test extraction of Repos",
 	)
 	parser.add_argument(
 		"--end",
 		type=int,
-		default=100,
+		default=1,
 		help="End range for the method and test extraction of Repos",
 	)
 	parser.add_argument(
@@ -83,7 +82,6 @@ def parse_args():
 
 	return vars(parser.parse_args())
 
-
 def main():
     args = parse_args()
     csv_path = args['csv_path']
@@ -92,8 +90,10 @@ def main():
     tmp = args['tmp']
     output = args['output']
     
-    check_so_file()
-    automate_find_map_test_cases(csv_path, start, end, tmp, output)
+    if check_so_file():
+        automate_find_map_test_cases(csv_path, start, end, tmp, output)
+    else:
+        print("Please run the check.py script first to check the existence of the required .so files!")
 
 if __name__ == '__main__':
 	main()
