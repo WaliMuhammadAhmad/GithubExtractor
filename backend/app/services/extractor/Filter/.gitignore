@@ -1,6 +1,0 @@
-# this folder contains 1K+ folders which has further JSON files in it
-# use git lfs if you want to push this to hub
-output/
-data/
-dataset/
-dataset-v1.0/

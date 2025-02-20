@@ -1,0 +1,17 @@
+{
+    "name": "JUnitExtractor",
+    "image": "ihatenlp/junitextractor",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-azuretools.vscode-docker",
+                "repreng.csv"
+            ]
+        }
+    },
+    "forwardPorts": [
+        5000
+    ],
+    "shutdownAction": "stopContainer"
+}

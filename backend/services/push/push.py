@@ -1,4 +1,4 @@
-from loggings import loggers
+from backend.app.utils.loggings import loggers
 
 def push(repo,local_dir):
     """
