@@ -1,15 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is an about Extractor</h1>
+  <div class="new">
+    <h1>🚧 Under Construction</h1>
+    <p>The new feature is under developement and will be live soon!</p>
   </div>
 </template>
 
 <style>
 @media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+  .new {
+    text-align: center;
   }
 }
 </style>
