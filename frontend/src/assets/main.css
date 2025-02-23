@@ -5,6 +5,11 @@
   margin: 0 auto;
 }
 
+.container {
+  margin: auto;
+  width: 90%;
+}
+
 a,
 .green {
   text-decoration: none;
@@ -15,7 +20,7 @@ a,
 
 .new {
   height: 90dvh;
-  width: 95%;
+  width: 90%;
   margin: 1.5rem auto;
   background-color: hsla(160, 100%, 37%, 0.2);
   border: 2px solid hsla(160, 100%, 37%, 0.2);
