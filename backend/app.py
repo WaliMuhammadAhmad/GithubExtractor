@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
+from dotenv import load_dotenv
 from services.getRepos.fetch import get_repo_details
 from typing import List, Optional, Union, Dict, Any
 import os
 
+load_dotenv()
 app = Flask(__name__)
+CORS(app, resources={r"/repos": {"origins": os.getenv("API_ORIGIN") }})
 
 # Directory to store generated files
 UPLOAD_FOLDER = 'downloads'
@@ -24,11 +28,13 @@ def repos() -> tuple[Dict[str, str], int]:
     if not req:
         return jsonify({"error": "No data provided"}), 400
     
+    print(req)
+    
     try:
         # Required field
-        language: str = req['language']  # string
-        sort: str = req.get('sort', 'stars')  # string, default 'stars', Options: 'stars', 'forks', 'updated'
-        order: str = req.get('order', 'desc')  # string, default 'desc', Options: 'asc', 'desc'
+        language: str = req['language']
+        sort: str = req.get('sort')  
+        order: str = req.get('order')
 
         # Optional fields with type hints
         name: Optional[str] = req.get('name')  # string or None
@@ -116,7 +122,7 @@ def repos() -> tuple[Dict[str, str], int]:
         query_parts.append(f"topics:{topics}")
     if min_topics is not None:
         query_parts.append(f"topics:>={min_topics}")
-    if license:
+    if license and license.lower() != "none":
         query_parts.append(f"license:{license}")
     if mirror is not None:
         query_parts.append(f"mirror:{str(mirror).lower()}")

@@ -24,7 +24,8 @@ def get_repo_details(lang: str, query: str = "created:>=2025-01-01", sort: str =
             print("GitHub authentication failed. Cannot retrieve repositories.")
             return None
         
-        repos = g.search_repositories(query=query, sort=sort, order=order)
+        print(query)
+        repos = g.search_repositories(query=query)
         print(f"{repos.totalCount} repositories found!")
 
         data = extract(repos)
