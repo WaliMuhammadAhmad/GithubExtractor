@@ -1,0 +1,20 @@
+POST http://127.0.0.1:5000/repos HTTP/1.1
+content-type: application/json
+
+{
+  "language": "python",
+  "sort": "stars",
+  "order": "asc",
+  "description": "web framework",
+  "min_size": 100,
+  "followers": 10,
+  "min_forks": 10,
+  "min_stars": 1,
+  "created": "2023-01-01",
+  "topics": 2,
+  "mirror": false,
+  "template": false,
+  "archived": false,
+  "good_first_issues": 0,
+  "help_wanted_issues": 0
+}
