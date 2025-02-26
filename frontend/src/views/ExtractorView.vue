@@ -5,10 +5,8 @@
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .new {
-    text-align: center;
-  }
+<style scoped>
+.new {
+  text-align: center;
 }
 </style>

@@ -48,10 +48,6 @@ import Footer from '@/components/Footer.vue'
 </template>
 
 <style scoped>
-.container {
-  margin: auto;
-  width: 90%;
-}
 .landingSection {
   height: 95dvh;
   width: 50dvw;
