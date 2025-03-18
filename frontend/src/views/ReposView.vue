@@ -1,19 +1,34 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Footer from '@/components/Footer.vue'
 import languages from '@/data/languages'
 import licenses from '@/data/license'
+import ModalView from '@/components/ModalView.vue'
 import { useReposForm } from '@/api/reposForm'
 
 const { reposForm, reqRepos } = useReposForm()
+const toggle = ref(false)
+const toggleModal = () => {
+  toggle.value = !toggle.value
+}
+
+const submitForm = async () => {
+  try {
+    await reqRepos() // Wait for API request to complete
+    toggle.value = true // Open modal only after success
+  } catch (error) {
+    console.error('Error fetching repos:', error)
+  }
+}
 </script>
 
 <template>
-  <div class="container">
+  <div class="container" style="position: relative">
     <section>
       <div class="section">
         <h1 class="heading">Get the list of public repositories from Github</h1>
         <div class="diffSection">
-          <form @submit.prevent="reqRepos" method="post">
+          <form @submit.prevent="submitForm">
             <!-- Starter -->
             <fieldset>
               <legend>Starter</legend>
@@ -467,11 +482,12 @@ const { reposForm, reqRepos } = useReposForm()
                 </div>
               </div>
             </fieldset>
-            <button class="button" type="submit">Submit</button>
+            <button class="button" @click="toggleModal" type="submit">Submit</button>
           </form>
         </div>
       </div>
     </section>
+    <ModalView v-if="toggle" @close="toggleModal" />
   </div>
 
   <section>
